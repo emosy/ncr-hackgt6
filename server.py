@@ -1,5 +1,6 @@
 from flask import Flask, render_template
 import plotly.graph_objects as go
+import plotly.io._html as phtml
 
 fig = go.Figure(data=go.Bar(y=[2, 3, 1]))
 # fig.show()
@@ -14,8 +15,7 @@ def index():
 @app.route('/my-link/')
 def my_link():
   print('I got clicked!')
-  fig.write_html('my_html.html')
-  return 'Click.' + send_from_directory('my_html.html')
+  return 'Click.' + phtml.to_html(fig, full_html=False)
 
 if __name__ == '__main__':
   app.run(debug=True)
