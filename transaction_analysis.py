@@ -60,6 +60,8 @@ def collect_data_dict(data, filters):
         #     out[line[key][0]] = line_list
         # else:
         #     out[line[key]] = line_list
+    for index in range(len(filters)):
+        out[index].reverse()
     return out
 
 def count_shtuff(all_data):
@@ -73,10 +75,11 @@ num = count_shtuff(all_data)
 print(all_data[0])
 print(num)
 sorted_data_thing = collect_data_dict(all_data,['grandAmount','itemCount','transactionNumber','employeeIds','closeDateTimeUtc'])
-print(len(sorted_data_thing))
+print(sorted_data_thing[4])
 # zip_data_thing = zip(sorted_data_thing)
-new_fig = go.Figure({"data": [{"type": "bar", "x": sorted_data_thing[4], "y": sorted_data_thing[0], "hovertext": sorted_data_thing[2], "hoverinfo": "text"}]})
+new_fig = go.Figure({"data": [{"type": "scatter", "mode": "markers", "x": list(range(len(sorted_data_thing[0]))), "y": sorted_data_thing[0], "marker.size": sorted_data_thing[1]}]})
 new_fig.write_html("my_html.html", auto_open=True)
+#, "hovertext": sorted_data_thing[4], "hoverinfo": "text"
 # for thingy in zip_data_thing:
 # new_graph = go.Bar(data=sorted_data_thing,hovertext=
 # new_fig = go.Figure(data=go.
